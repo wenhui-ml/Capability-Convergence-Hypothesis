@@ -1,0 +1,89 @@
+{
+ "rows": [
+  {
+   "ckpt": "e_hybrid_d2a_s0_ckpt_final.pt",
+   "seed": 0,
+   "probes": {
+    "state_to_referent": 0.8382,
+    "state_to_value": 0.0044,
+    "attn_to_referent": 0.6198,
+    "attn_to_value": 1.0
+   },
+   "base": {
+    "T256_N16": 0.9658203125,
+    "T40_N64": 1.0
+   },
+   "lesion": {
+    "state": {
+     "T256_N16": 0.0,
+     "T40_N64": 0.0
+    },
+    "attn": {
+     "T256_N16": 0.001953125,
+     "T40_N64": 0.0009765625
+    }
+   }
+  },
+  {
+   "ckpt": "e_hybrid_d2a_s1_ckpt_final.pt",
+   "seed": 1,
+   "probes": {
+    "state_to_referent": 0.0203,
+    "state_to_value": 0.0044,
+    "attn_to_referent": 0.9961,
+    "attn_to_value": 1.0
+   },
+   "base": {
+    "T256_N16": 0.9794921875,
+    "T40_N64": 1.0
+   },
+   "lesion": {
+    "state": {
+     "T256_N16": 0.0,
+     "T40_N64": 0.0
+    },
+    "attn": {
+     "T256_N16": 0.001953125,
+     "T40_N64": 0.0029296875
+    }
+   }
+  },
+  {
+   "ckpt": "e_hybrid_d2a_s2_ckpt_final.pt",
+   "seed": 2,
+   "probes": {
+    "state_to_referent": 0.0664,
+    "state_to_value": 0.0034,
+    "attn_to_referent": 0.5271,
+    "attn_to_value": 1.0
+   },
+   "base": {
+    "T256_N16": 0.9638671875,
+    "T40_N64": 1.0
+   },
+   "lesion": {
+    "state": {
+     "T256_N16": 0.0078125,
+     "T40_N64": 0.0048828125
+    },
+    "attn": {
+     "T256_N16": 0.0,
+     "T40_N64": 0.0009765625
+    }
+   }
+  }
+ ],
+ "verdicts": {
+  "a_state_decodes_referent": 0.30829999999999996,
+  "a_attn_decodes_referent": 0.7143333333333333,
+  "a_state_decodes_value": 0.004066666666666667,
+  "a_attn_decodes_value": 1.0,
+  "a_pass": false,
+  "b_state_lesion_drop_T": 0.9671,
+  "b_state_lesion_drop_N": 0.9984,
+  "b_attn_lesion_drop_T": 0.9684,
+  "b_attn_lesion_drop_N": 0.9984,
+  "b_pass": false,
+  "complementarity_reestablished": false
+ }
+}

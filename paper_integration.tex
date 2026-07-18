@@ -1,0 +1,386 @@
+% ============================================================================
+% paper_integration.tex — measured-experiments section for CCH_arxiv.tex
+%
+% STATUS: MERGED into CCH_arxiv.tex on 2026-07-11 (section
+% \label{sec:experiments} before the Conclusion; fig:fano and fig:nhgrid
+% replaced in place; the three suggested text edits applied). The merged
+% version additionally incorporates the amendment-7 follow-up results
+% (B-iii supported at 24k; C-iii reported as capacity-not-trainability, 3/8
+% at 8 seeds; Exp A at n=200; Exp D v2 with CKA and the beta(0,1) arm) —
+% see experiments/REPORT.md. THE CANONICAL TEXT NOW LIVES IN CCH_arxiv.tex;
+% this file is kept only as the pre-merge staging record.
+% ============================================================================
+% HOW TO INTEGRATE (do not compile this file standalone; it uses the paper's
+% preamble, macros (\Rgm), theorem counters, and natbib):
+%
+%   1. \input{experiments/paper_integration} as a new section between
+%      Section~\ref{sec:related} (Demarcation) and Section~\ref{sec:predictions}
+%      (Falsifiable Predictions), or immediately after \ref{sec:predictions}.
+%   2. REPLACE the figure environment labeled fig:fano (around line 510 of
+%      CCH_arxiv.tex) with the "REPLACEMENT FIGURE 3" environment below.
+%   3. REPLACE the figure environment labeled fig:nhgrid (around line 1201)
+%      with the "REPLACEMENT FIGURE 8" environment below.
+%   4. The new dissociation figure (fig:dissoc) is included inside the section.
+%   5. UPDATE the sentence in Section~\ref{sec:predictions} that begins "the
+%      quantitative shapes in the prediction figures ... are schematic": see
+%      the suggested replacement in the comment block at the end of this file,
+%      together with a suggested revision of the fig:comm caption (P3's
+%      miniature test FAILED; its figure must not imply support).
+%   6. Figure paths assume compilation from the paper root
+%      (./), with figures at experiments/figs/.
+% ============================================================================
+
+\section{First Controlled Evidence at Small Scale}
+\label{sec:experiments}
+
+The predictions of Section~\ref{sec:predictions} were published as schematic
+figures; this section reports the first controlled measurements of
+Predictions~\ref{pred:floor}--\ref{pred:comm}, together with a model-level
+dissociation experiment linking CCH to PRH. Everything here operates strictly
+inside the regime $\Rgm$ the paper is scoped to: fixed depth, no
+chain-of-thought, no tools, fixed per-token compute; within each comparison only
+the sequence-mixing operator differs, with identical data distribution,
+optimizer, and training budget. We emphasize the scale up front: the trained
+models are $\sim$0.2--1.1M parameters and the public-checkpoint analysis stops
+at $\sim$3B. These are small-scale existence tests of the predicted
+\emph{mechanisms}, not demonstrations at frontier scale
+(cf.\ Limitation~(v), Section~\ref{sec:limitations}).
+
+\paragraph{Pre-registration protocol.}
+All support/falsification criteria were frozen in a written protocol
+(\texttt{experiments/PREREGISTRATION.md}, dated 2026-07-10) before the
+corresponding data were collected: pass thresholds (e.g.\ accuracy $\ge 0.9$;
+a cell passes if $\ge 2/3$ seeds pass), the single fitted constant permitted in
+Experiment~B ($p_{\mathrm{eff}}$, fit once on one architecture and frozen for
+the others), and the explicit falsification conditions for each prediction.
+Six amendments were logged with timestamps before the corresponding data
+existed (a depth-advantaged Transformer control; a local-window hybrid control;
+a $5\times$ budget extension with decision thresholds unchanged, arranged so
+that within every comparative claim the predicted-fail side received at least
+the budget of the predicted-pass side; a switch to dense LM supervision applied
+uniformly to all architectures; and two redesigns of confounded conditions,
+each reported below alongside the failed-as-designed original). All completed
+cells are reported; no seeds or cells were excluded post hoc. Code, seeds, raw
+result files, and the protocol are included in the repository for reproduction.
+
+\subsection{P2, measured: the state-tracking bifurcation (Experiment C)}
+\label{sec:expC}
+
+\textbf{Setup.} $S_5$ word problem: the label at position $t$ is the running
+product $g_1\!\circ\!\cdots\!\circ\! g_t$ (120-way classification). Two
+streams: \emph{swap} (each token a transposition) and \emph{general} (each
+token an arbitrary $S_5$ element). Training length $T\!\le\!40$; evaluation at
+$T\in\{40,64,128,256,512\}$; ``length-generalizes'' $=$ pass at $T{=}256$
+($6.4\times$ training length). Architectures (2 layers, $d_{\mathrm{model}}
+{=}128$, 3 seeds): DeltaNet with $\beta\in(0,1)$ (no reflection --- the
+production parameterization, the starred prediction), DeltaNet
+$\beta\in(0,2)$, DeltaProduct $n_h\in\{2,4\}$~\citep{grazzi2025deltaproduct},
+diagonal SSM, Transformer (2-layer, and a depth-advantaged 8-layer with
+$4\times$ the parameters), and LSTM.
+
+\textbf{Results (Figure~\ref{fig:nhgrid}).} All six pre-registered predictions
+held.
+(i)~\emph{The starred prediction:} DeltaNet $\beta\in(0,1)$ fails both streams
+at $T{=}256$ --- in fact it stays at chance ($\approx 0.008$) even at the
+training length after a $5\times$ budget extension (100k steps): without
+reflections the model cannot even \emph{fit} composed $S_5$, a stronger outcome
+than predicted.
+(ii)~Unlocking one reflection ($\beta\in(0,2)$, $n_h{=}1$) is alone sufficient
+for the swap stream: accuracy $1.0/1.0/0.998$ across seeds at $T{=}256$.
+(iii)~On the general stream the expressivity ladder appears at $n_h{=}4$:
+accuracy at $T{=}256$ is $0.010$ ($n_h{=}1$), $0.011$ ($n_h{=}2$), and
+$\{0.995, 1.000, 0.013\}$ across seeds ($n_h{=}4$; 2/3 pass, one seed never
+converged), with one $n_h{=}4$ seed extrapolating perfectly to $T{=}512$
+($12.8\times$ training length). The measured transition is a step rather than a
+graded staircase --- $n_h{=}2$ gains nothing --- which satisfies the
+pre-registered monotonicity-plus-endpoints criterion but is sharper than the
+schematic grid suggested.
+(iv)~Both Transformers fail extrapolation: the 2-layer control is at chance
+everywhere (consistent with fixed-depth $\mathrm{TC}^0$ limits,
+Proposition~\ref{prop:circuit}); the 8-layer control reaches $1.0$ in-length on
+swap and collapses to $0.03$ at $T{=}64$ --- high in-distribution performance
+with immediate extrapolation failure, the exact signature the circuit wall
+predicts for a fixed-depth parallel architecture.
+(v)~The diagonal SSM is at chance in every cell.
+(vi)~The LSTM (nonlinear full-rank recurrence) passes everything: accuracy
+$1.000$ at every length on both streams, including $T{=}512$.
+An honest optimization note: at the original 20k-step budget the LSTM
+(general stream) and DeltaProduct $n_h{=}4$ had not yet converged; the
+conclusion-relevant budget extension was pre-registered before those runs, and
+every predicted-fail cell received at least the budget of every predicted-pass
+cell, so no failure above is attributable to budget.
+
+\subsection{P1, measured: the information floor and the scissors gap
+(Experiment B)}
+\label{sec:expB}
+
+\textbf{Setup.} Executable Newton's-apple task $\mathrm{NA}(N,b,B;\kappa)$:
+$N$ key--value bindings ($b{=}8$ bits per value) planted in a length-512
+stream with semantic-overlap distractors $\kappa$, single query at the end.
+Pure-state models (DeltaNet) with total recurrent state $m\in\{64,256,1024\}$
+scalars; sliding-window attention ($w{=}32$); a hybrid holding the \emph{same}
+$m{=}64$ state plus one global-attention layer; the same state plus a
+window-only layer (not access-complete); and full attention. 3 seeds
+throughout; identical budgets.
+
+\textbf{Results (Figure~\ref{fig:fano}).}
+(i)~\emph{Floor rise:} every pure-state error curve rises monotonically in $N$
+and saturates toward the $b$-bit chance floor (error $0.994/0.977/0.854$ at
+$N{=}128$ for $m{=}64/256/1024$; chance $0.996$).
+(ii)~\emph{Load-ratio collapse:} with the single frozen constant
+$p_{\mathrm{eff}}{=}0.39$ bits/scalar (fit on $m{=}256$ only), the 50\%-error
+crossings of all three pure-state curves land at load ratio
+$x = Nb/(m\,p_{\mathrm{eff}}) \in [0.82, 1.03]$, and the $m{=}256$ and
+$m{=}1024$ curves collapse onto each other within $0.024$ error at shared $x$.
+The pre-registered $\pm 0.1$ collapse band is met by the two larger states but
+violated (deviation up to $0.15$) by $m{=}64$, whose runs sit at the edge of
+trainability (see below); we report the criterion as only partially met.
+(iii)~\emph{The scissors gap, measured:} at $N{=}128$ the pure $m{=}64$ model
+has error $0.994$ while the hybrid carrying the \emph{same} 64-scalar state
+plus one global-attention layer has mean error $0.060$
+(seeds $0.018/0.125/0.038$) --- the measured counterpart of
+Figure~\ref{fig:fano}'s predicted dive, though the strict pre-registered bound
+($\le 0.05$ at every $N$) is crossed at the last grid point by one seed.
+Its conditional log-loss rides near zero while every pure-state curve tracks
+the $b(1-1/x)$ floor of Theorem~\ref{thm:shannon}.
+(iv)~\emph{The index must be global:} the same state paired with a
+window-limited layer is not rescued (error $\ge 0.91$ at all $N$) --- being
+access-complete, not merely having attention, is what matters
+(cf.\ Figure~\ref{fig:sankey}).
+(v)~\emph{Horizon wall:} the sliding-window model is at chance ($0.99+$) for
+bindings beyond its window at \emph{every} $N$; trained only on far-binding
+layouts it never learns retrieval at all. Within-window retrieval is good at
+small $N$ (error $0.07$ at $N{=}2$) but the pre-registered
+``near-perfect independent of $N$'' clause is not realizable in this design
+(more than $\sim$8 bindings no longer fit inside the window); we count the
+prediction as only partially confirmed.
+(vi)~\emph{Fano sanity:} no architecture beats the floor computed from nominal
+capacity anywhere on the grid.
+(vii)~\emph{Compressibility:} with values duplicated in blocks ($c{=}16$) the
+error wall shifts right to a 50\%-crossing at $N\!\approx\!27$, matching the
+effective-entropy prediction ($N\!\approx\!25$) rather than the nominal one
+($N\!\approx\!12$); the intermediate $c{=}4$ condition, however, tracks the
+nominal prediction, and the block design admits a retrieval-free shortcut at
+$N\le c$, so we report this axis as mixed evidence.
+(viii)~\emph{A null and an anomaly, reported as such:} the semantic-overlap
+ordering ($\kappa$) shows \emph{no} detectable effect at matched weights
+(mean error $0.610$ vs.\ $0.609$); and small 2-layer \emph{full attention} is
+not the upper-bound reference the schematic assumed --- its error climbs to
+$0.91$ at $N{=}128$, far above the hybrid's, an optimization (not capacity)
+failure at this scale. The access-complete witness in these experiments is the
+hybrid, exactly the pattern R1--R3 (Section~\ref{sec:regularities}) document in
+production models. Finally, trainability itself depended on state size: 3 of 6
+pure $m{=}64$ runs never learned even $N{=}2$ (no such failure at
+$m\in\{256,1024\}$ or for any hybrid); all reported means include these seeds,
+per protocol.
+
+% ---------------------------------------------------------------------------
+% REPLACEMENT FIGURE 3 (replaces the schematic fig:fano environment,
+% CCH_arxiv.tex around line 510; label preserved so all \ref's resolve)
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{experiments/figs/expB_floor.pdf}
+  \caption{The information floor and the scissors gap, \emph{measured}
+  (Experiment~B: $\mathrm{NA}(N,b{=}8,B;\kappa)$, $L{=}512$, 3 seeds; shaded
+  bands span seeds). \textbf{(a)} Exact-retrieval error vs.\ load $N$: every
+  pure-state curve ($m\in\{64,256,1024\}$ recurrent scalars) rises to the
+  chance ceiling while the hybrid --- the \emph{same} $m{=}64$ state plus one
+  global-attention layer --- stays near zero: the measured scissors of
+  Prediction~\ref{pred:floor}. A window-only index (teal) does not rescue the
+  state, and small 2-layer full attention (navy) is \emph{not} an upper bound
+  at this scale --- access-completeness, not attention per se, is what
+  separates the families. \textbf{(b)} The three pure-state curves plotted
+  against the load ratio $x=Nb/(m\,p_{\mathrm{eff}})$ with the single frozen
+  constant $p_{\mathrm{eff}}{=}0.39$ bits/scalar: 50\%-crossings collapse to
+  $x\in[0.82,1.03]$ ($m{=}256$ vs $m{=}1024$ within $0.024$ error; $m{=}64$,
+  at the edge of trainability, deviates by up to $0.15$). \textbf{(c)} Value
+  log-loss rides the $b(1-1/x)$ floor of Theorem~\ref{thm:shannon} (dashed);
+  the hybrid's stays near zero because its $\Omega(Nb)$ load rides the index
+  channel (Assumption~\ref{ass:sep}). \textbf{(d)} No detectable
+  semantic-overlap ($\kappa$) effect at matched weights --- a pre-registered
+  prediction that returned a null, reported as such. \textbf{(e)} With
+  compressible values the wall tracks effective entropy at $c{=}16$ but not at
+  $c{=}4$: mixed evidence. \textbf{(f)} The horizon wall is a cliff: the
+  sliding-window model is at chance for out-of-window bindings at every $N$.
+  \emph{Measured data; protocol and per-seed results in
+  \texttt{experiments/}.}}
+  \label{fig:fano}
+\end{figure}
+
+% ---------------------------------------------------------------------------
+% REPLACEMENT FIGURE 8 (replaces the schematic fig:nhgrid environment,
+% CCH_arxiv.tex around line 1201; label preserved)
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\linewidth]{experiments/figs/expC_bifurcation.pdf}
+  \caption{The state-tracking bifurcation, \emph{measured} (Experiment~C:
+  running products in $S_5$, trained at $T\le 40$, 3 seeds; bands span seeds).
+  \textbf{(a,b)} Last-position accuracy vs.\ evaluation length on the swap
+  stream (one transposition per token) and the general stream (arbitrary
+  $S_5$ element per token). \textbf{(c,d)} The measured version of the
+  predicted grid. The bifurcation of Prediction~\ref{pred:bifurcation} appears
+  exactly at the predicted boundary: the production parameterization
+  $\beta\in(0,1)$ ($*$, the paper's sharpest claim) cannot even fit the
+  training distribution; one reflection ($\beta\in(0,2)$) suffices for the
+  swap stream at $6.4\times$ training length; the general stream requires
+  $n_h{=}4$ reflections per token (2/3 seeds pass at $T{=}256$; one seed
+  reaches accuracy $1.0$ at $T{=}512$, $12.8\times$ training length); diagonal
+  SSM and both Transformer controls fail extrapolation (the 8-layer,
+  $4\times$-parameter Transformer reaches $1.0$ in-length on swap and collapses
+  to $0.03$ at $T{=}64$); the LSTM control passes everything. \emph{Measured
+  data replacing the schematic prediction of earlier versions.}}
+  \label{fig:nhgrid}
+\end{figure}
+
+\subsection{Representational convergence without capability convergence
+(Experiment A)}
+\label{sec:expA}
+
+\textbf{Setup.} Three public model families trained on the same corpus (The
+Pile) with the same tokenizer, spanning 70M--3B: Pythia (attention), Mamba
+(pure SSM), RWKV-4 (linear RNN). Capability axis: $N$ templated facts planted
+at controlled depth in Pile-style filler ($L\in\{896,1900\}$), exact-match
+retrieval at the query. Representation axis: PRH's own metric --- mutual
+$k$-NN alignment ($k{=}10$; CKA as a check) between all model pairs on 1024
+shared Pile snippets, max over layer pairs.
+
+\textbf{Results (Figure~\ref{fig:dissoc}).}
+(i)~\emph{PRH replicates on this triplet:} cross-family representational
+alignment grows with scale (Spearman $\rho = 0.57/0.87/0.51$ for
+Pythia--Mamba/Pythia--RWKV/Mamba--RWKV; $n=30/24/20$ pairs, all $p<0.05$),
+reaching $0.7+$ against a chance level of $0.01$ --- the first convergence, as
+reported by~\citet{huh2024platonic}, is real here.
+(ii)~\emph{Capability nonetheless stratifies by access structure:} at matched
+$\sim$2.8B scale ($N{=}16$ early-depth facts, $L{=}1900$), retrieval accuracy
+is Pythia $0.35$, Mamba $0.08$, RWKV $0.00$. The pre-registered margin
+($\ge 30$pp over both recurrent families) is met against RWKV ($35$pp) but
+narrowly missed against Mamba ($27$pp); the ordering
+Pythia $>$ Mamba $>$ RWKV holds in every matched-scale cell at $N\ge 16$.
+(iii)~\emph{The failure signature is architectural:} Mamba's accuracy falls as
+facts move away from the query (recency; e.g.\ $0.06\!\to\!0.37$ mean accuracy
+from early to late depth for Mamba-1.4b) while Pythia-2.8b is nearly flat
+($0.44\!\to\!0.48$); RWKV sits at an accuracy floor at all depths.
+(iv)~\emph{The dissociation:} across 74 cross-family pairs, representational
+alignment does \emph{not} predict capability parity --- the correlation
+between alignment and the absolute retrieval gap is significantly
+\emph{positive} (Spearman $\rho = +0.48$, $p<10^{-4}$; the pre-registered
+falsification was a significantly negative one), and the
+high-alignment/large-gap quadrant is well populated. Representational
+convergence, PRH's endpoint, does not purchase capability convergence; the
+capability boundary tracks the access structure. This is the measured form of
+the paper's central claim that the second convergence is a distinct, physical
+one.
+
+% ---------------------------------------------------------------------------
+% NEW FIGURE (dissociation) — place inside or immediately after this section
+% ---------------------------------------------------------------------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{experiments/figs/expA_dissociation.pdf}
+  \caption{Representational convergence $\ne$ capability convergence
+  (Experiment~A: Pythia / Mamba / RWKV-4, all pretrained on The Pile with a
+  shared tokenizer). \textbf{(a)} Retrieval capability stratifies by access
+  structure at matched scale and data. \textbf{(b)} The failure signature at
+  $\sim$3B: recency slope for the compressive-state family, near-flat for the
+  indexed family, floor for the linear RNN. \textbf{(c)} PRH replication:
+  cross-family mutual $k$-NN alignment grows with scale (all three family
+  pairings $p<0.05$). \textbf{(d)} The dissociation: alignment does not
+  predict the capability gap (cross-family Spearman $\rho=+0.48$ ---
+  positive, not negative); the high-alignment/large-gap quadrant is occupied.
+  \emph{Measured data.}}
+  \label{fig:dissoc}
+\end{figure}
+
+\subsection{P3 miniature: a failed prediction, reported as such
+(Experiment D)}
+\label{sec:expD}
+
+We tested Prediction~\ref{pred:comm} in miniature on the trained hybrids of
+Experiment~B: mutual $k$-NN alignment between the state-channel and
+index-channel layer outputs at matched positions, for task-solving final
+checkpoints vs.\ failing (undertrained and degenerate) checkpoints vs.\ random
+initialization. \textbf{The prediction failed, with the direction reversed:}
+solving hybrids show the \emph{lowest} cross-channel alignment
+($0.28$ mean, $n{=}9$), below failing checkpoints ($0.38$--$0.53$) and below
+random initialization ($0.58$, $n{=}3$). Two lessons, stated plainly. First,
+the schematic premise that random initialization is a low-alignment floor is
+empirically wrong for this metric: two randomly initialized channels reading
+the same tokens are already highly $k$-NN-aligned, because both echo input
+geometry. Second, in hybrids that solve the task, training \emph{differentiates}
+the channels rather than aligning them --- consistent with the two channels
+carrying complementary loads (compressive shortlist vs.\ verbatim index), which
+is the mechanism of Section~\ref{sec:cross}, but the opposite of the
+commensurability signature Prediction~\ref{pred:comm} registered. As committed
+in the protocol, we report this as a failed prediction of CCH:
+Prediction~\ref{pred:comm} as operationalized (alignment above a random floor)
+must be retracted or re-operationalized --- a metric of channel
+\emph{complementarity} rather than channel \emph{similarity} --- and
+Figure~\ref{fig:comm} retains its schematic label with this negative result
+noted in its caption.
+
+\subsection{Deviations, and what these results do not establish}
+\label{sec:exp-honesty}
+
+\textbf{Deviations from the frozen protocol} (beyond the six timestamped
+amendments): the sliding-window width was $w{=}32$, not the registered
+$w{=}64$ (the receptive field remains far smaller than the binding--query
+distance, which is what the horizon-wall logic requires); Experiment~A used
+$L\in\{896,1900\}$ rather than $2048$ and $100$ rather than $\ge 200$ instances
+per cell (context-window and cost constraints of the public checkpoints); the
+exact analytic entropy of the compressibility conditions was approximated by
+$b-\log_2 c$; the $\beta\in(0,1)$-hybrid arm of Experiment~D was not run.
+None of these was decided after seeing results they could affect.
+
+\textbf{Scorecard.} Of 19 pre-registered predictions: 11 supported, 7 partial
+(direction confirmed, a frozen threshold or sub-clause missed --- each
+detailed above with the miss stated), 1 failed (D-i, direction reversed).
+None of the pre-registered \emph{falsification} conditions for P1 or P2 was
+triggered: no pure-state architecture held low error at high load, no
+$\beta\in(0,1)$ model length-generalized composed $S_5$, no diagonal SSM
+passed, and the $n_h$ monotonicity was not violated.
+
+\textbf{Scope.} These experiments establish that the predicted mechanisms ---
+the information floor, the scissors gap, the reflection-gated bifurcation, and
+the dissociation of representational from capability convergence --- are real
+and land where CCH says they land, at small scale, under gradient descent
+rather than by construction (addressing Limitation~(iv)). They do not
+establish the magnitudes at frontier scale (Limitation~(v) stands), they
+leave P3 without positive evidence, and two comparisons (the Pythia--Mamba
+margin; the $\pm 0.1$ collapse band at $m{=}64$) missed their frozen
+thresholds and are claimed only as directional.
+
+% ============================================================================
+% SUGGESTED TEXT EDITS ELSEWHERE IN CCH_arxiv.tex (apply by hand; the main
+% text is not modified by this file)
+% ============================================================================
+%
+% (1) Section \ref{sec:predictions}, the sentence at ~line 1165:
+%   REPLACE
+%     "the quantitative shapes in the \emph{prediction} figures
+%      (Figures~\ref{fig:fano}, \ref{fig:nhgrid}, \ref{fig:comm}, \ref{fig:fp})
+%      are schematic illustrations to be tested, not measured results---"
+%   WITH
+%     "Figures~\ref{fig:fano} and \ref{fig:nhgrid} now show \emph{measured}
+%      results from the pre-registered experiments of
+%      Section~\ref{sec:experiments}; Figure~\ref{fig:comm} remains schematic
+%      --- its miniature test \emph{failed} (Section~\ref{sec:expD}) --- and
+%      Figure~\ref{fig:fp} remains an untested schematic---"
+%
+% (2) fig:comm caption (~line 941): keep "\emph{Schematic prediction, not
+%     measured data.}" and APPEND:
+%     "A pre-registered miniature test of this prediction on trained hybrids
+%      \emph{failed with the direction reversed} (Section~\ref{sec:expD}):
+%      solving hybrids showed \emph{lower} cross-channel alignment than random
+%      initialization, because two random channels reading the same stream are
+%      already highly aligned. The prediction as drawn requires
+%      re-operationalization (complementarity, not similarity); we retain the
+%      schematic only as a record of the original claim."
+%
+% (3) Limitation (iv) (~line 1237): after "until they are run, CCH's
+%     learnability claim is an extrapolation", ADD:
+%     "Section~\ref{sec:experiments} now provides this bridge at small scale:
+%      gradient descent finds the hybrid solution and the bifurcation lands at
+%      the predicted expressivity boundary."
+% ============================================================================

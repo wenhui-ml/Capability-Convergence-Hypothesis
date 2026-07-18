@@ -1,0 +1,19 @@
+{
+ "verdicts": {
+  "B-i: pure-state error rises with N toward saturation": true,
+  "B-ii: load-ratio collapse (all 50% crossings within [0.5,2]x of each other)": true,
+  "B-iii: scissors (hybrid m=64 err<=0.05 all N; pure m=64 >0.5 at N=128)": false,
+  "B-viii: local-window hybrid is NOT rescued (err>0.5 at N=128)": true,
+  "B-iv (amended): horizon cliff (near N<=8 err<=0.2; far err>=0.9 all N)": false,
+  "B-v: no architecture beats the nominal-capacity Fano floor": true,
+  "B-vi (amended): high-kappa >= low-kappa at matched weights": true
+ },
+ "notes": {
+  "p_eff_bits_per_scalar": 0.389,
+  "x_at_50pct_error": {
+   "b_state64": 0.821,
+   "b_state256": 1.0,
+   "b_state1024": 1.028
+  }
+ }
+}

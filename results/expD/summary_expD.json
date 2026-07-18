@@ -1,0 +1,38 @@
+{
+ "verdict": {
+  "D-i: solving hybrids align above random-init floor": false,
+  "note": "FAILED, direction reversed: solving finals have the LOWEST cross-channel alignment; random init is a high-alignment ceiling (~0.58), not a floor. b_hybrid_local rows excluded (loaded under global-attn spec, architecture mismatch; outside pre-registered D design). beta(0,1) hybrid arm run in v2 (d_comm_v2.json): 3 solving-final checkpoints, k-NN mean 0.261, consistent with the reversal (breaks tracking, not retrieval)."
+ },
+ "groups": {
+  "solving_final_err_le_0125": {
+   "n": 9,
+   "mean": 0.284,
+   "min": 0.212,
+   "max": 0.358
+  },
+  "failing_final_vb16": {
+   "n": 3,
+   "mean": 0.376,
+   "min": 0.369,
+   "max": 0.391
+  },
+  "early_failing": {
+   "n": 12,
+   "mean": 0.527,
+   "min": 0.452,
+   "max": 0.597
+  },
+  "random_init": {
+   "n": 3,
+   "mean": 0.576,
+   "min": 0.556,
+   "max": 0.597
+  },
+  "excluded_hybrid_local": {
+   "n": 12,
+   "mean": 0.48,
+   "min": 0.404,
+   "max": 0.576
+  }
+ }
+}

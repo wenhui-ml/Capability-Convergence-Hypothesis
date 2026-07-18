@@ -1,0 +1,8 @@
+{
+ "A-ii: Pythia-2.8b exceeds Mamba-2.8b & RWKV-3b by >=30pp (N16 d0.1)": false,
+ "acc_N16_d0.1": {
+  "pythia": 0.39,
+  "mamba": 0.14,
+  "rwkv": 0.0
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "corpus": {
+  "text": "NeelNanda/pile-10k (the Exp A snippet source)",
+  "code": "1403 .py files from numpy+scipy source trees"
+ },
+ "params": {
+  "jaccard_threshold": 0.5,
+  "max_keys_per_window": 1000
+ },
+ "text_entities_doc": {
+  "n_windows": 8274,
+  "mean_keys_per_window": 32.1434614454919,
+  "collision_rate": 0.12475042770393488,
+  "separable_fraction": 0.8752495722960651,
+  "per_window_mean_rate": 0.08633091741581791
+ },
+ "text_numeric_ids_doc": {
+  "n_windows": 3104,
+  "mean_keys_per_window": 15.512564432989691,
+  "collision_rate": 0.4932400157836805,
+  "separable_fraction": 0.5067599842163195,
+  "per_window_mean_rate": 0.4800115189873966
+ },
+ "text_entities_8doc": {
+  "n_windows": 1250,
+  "mean_keys_per_window": 209.7416,
+  "collision_rate": 0.13518729713132732,
+  "separable_fraction": 0.8648127028686727,
+  "per_window_mean_rate": 0.1311277009571028
+ },
+ "text_numeric_ids_8doc": {
+  "n_windows": 1223,
+  "mean_keys_per_window": 39.7914963205233,
+  "collision_rate": 0.5320045207027638,
+  "separable_fraction": 0.46799547929723617,
+  "per_window_mean_rate": 0.5936153391427181
+ },
+ "code_identifiers_file": {
+  "n_windows": 1096,
+  "mean_keys_per_window": 50.85127737226277,
+  "collision_rate": 0.43790931763945956,
+  "separable_fraction": 0.5620906823605405,
+  "per_window_mean_rate": 0.3378213786333048
+ },
+ "code_identifiers_8file": {
+  "n_windows": 175,
+  "mean_keys_per_window": 314.36571428571426,
+  "collision_rate": 0.45435707274511944,
+  "separable_fraction": 0.5456429272548806,
+  "per_window_mean_rate": 0.4257345398603055
+ }
+}

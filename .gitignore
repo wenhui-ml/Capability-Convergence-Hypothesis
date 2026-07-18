@@ -216,3 +216,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- CCH: excluded from public repo ----
+# Internal working docs (identity + private strategy notes) — keep local only
+HANDOFF_PROMPT.md
+ANALYSIS_ZH.md
+# Large model checkpoints (~110MB) — host on Hugging Face if needed, not GitHub
+results/**/*.pt
+# Run logs & agent-orchestration trail (not needed for reproduction)
+logs/
+relay.sh

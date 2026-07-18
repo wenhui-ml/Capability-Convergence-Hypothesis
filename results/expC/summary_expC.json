@@ -1,0 +1,33 @@
+{
+ "verdicts": {
+  "C-i (starred): delta b(0,1) FAILS both streams @256": true,
+  "C-ii: delta b(0,2) nh=1 PASSES swap @256": true,
+  "C-iii: nh staircase on general (acc@256 nondecr, nh4 pass, nh1 fail)": false,
+  "C-iv: transformers fail @256 (both streams, both depths)": true,
+  "C-v: diagonal SSM fails @256": true,
+  "C-vi: LSTM passes @256 both streams": true
+ },
+ "acc_at_256_general": {
+  "c_delta_b2": 0.01,
+  "c_dp2": 0.011499999999999998,
+  "c_dp4": 0.498
+ },
+ "n_seeds": {
+  "c_attn/general": 3,
+  "c_attn/swap": 3,
+  "c_attn8/general": 3,
+  "c_attn8/swap": 3,
+  "c_delta_b1/general": 3,
+  "c_delta_b1/swap": 3,
+  "c_delta_b2/general": 3,
+  "c_delta_b2/swap": 3,
+  "c_diag/general": 3,
+  "c_diag/swap": 3,
+  "c_dp2/general": 3,
+  "c_dp2/swap": 3,
+  "c_dp4/general": 8,
+  "c_dp4/swap": 3,
+  "c_lstm/general": 3,
+  "c_lstm/swap": 3
+ }
+}

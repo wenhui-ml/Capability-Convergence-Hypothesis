@@ -1,0 +1,427 @@
+{
+ "k": 10,
+ "n_snippets": 1024,
+ "chance_knn": 0.009775171065493646,
+ "pairs": {
+  "mamba-1.4b-hf__mamba-130m-hf": {
+   "mutual_knn": 0.6483398675918579,
+   "cka": 0.9167341589927673
+  },
+  "mamba-1.4b-hf__mamba-2.8b-hf": {
+   "mutual_knn": 0.7845703363418579,
+   "cka": 0.9695900082588196
+  },
+  "mamba-1.4b-hf__mamba-370m-hf": {
+   "mutual_knn": 0.7346680164337158,
+   "cka": 0.9437814950942993
+  },
+  "mamba-1.4b-hf__mamba-790m-hf": {
+   "mutual_knn": 0.7600586414337158,
+   "cka": 0.9437767267227173
+  },
+  "mamba-1.4b-hf__pythia-1.4b": {
+   "mutual_knn": 0.6849609613418579,
+   "cka": 0.9158022403717041
+  },
+  "mamba-1.4b-hf__pythia-160m": {
+   "mutual_knn": 0.56103515625,
+   "cka": 0.897072970867157
+  },
+  "mamba-1.4b-hf__pythia-1b": {
+   "mutual_knn": 0.703808605670929,
+   "cka": 0.9133202433586121
+  },
+  "mamba-1.4b-hf__pythia-2.8b": {
+   "mutual_knn": 0.6861328482627869,
+   "cka": 0.9496113061904907
+  },
+  "mamba-1.4b-hf__pythia-410m": {
+   "mutual_knn": 0.6460937261581421,
+   "cka": 0.9134001731872559
+  },
+  "mamba-1.4b-hf__pythia-70m": {
+   "mutual_knn": 0.5313476324081421,
+   "cka": 0.8636699914932251
+  },
+  "mamba-1.4b-hf__rwkv-4-169m-pile": {
+   "mutual_knn": 0.604785144329071,
+   "cka": 0.8114227056503296
+  },
+  "mamba-1.4b-hf__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.71923828125,
+   "cka": 0.8440732359886169
+  },
+  "mamba-1.4b-hf__rwkv-4-3b-pile": {
+   "mutual_knn": 0.7043945789337158,
+   "cka": 0.8900001049041748
+  },
+  "mamba-1.4b-hf__rwkv-4-430m-pile": {
+   "mutual_knn": 0.6936523914337158,
+   "cka": 0.8390427827835083
+  },
+  "mamba-130m-hf__mamba-2.8b-hf": {
+   "mutual_knn": 0.585253894329071,
+   "cka": 0.9042490720748901
+  },
+  "mamba-130m-hf__mamba-370m-hf": {
+   "mutual_knn": 0.734082043170929,
+   "cka": 0.9505073428153992
+  },
+  "mamba-130m-hf__mamba-790m-hf": {
+   "mutual_knn": 0.683886706829071,
+   "cka": 0.9380825757980347
+  },
+  "mamba-130m-hf__pythia-1.4b": {
+   "mutual_knn": 0.672070324420929,
+   "cka": 0.9218984246253967
+  },
+  "mamba-130m-hf__pythia-160m": {
+   "mutual_knn": 0.63427734375,
+   "cka": 0.9025190472602844
+  },
+  "mamba-130m-hf__pythia-1b": {
+   "mutual_knn": 0.6610351800918579,
+   "cka": 0.9221117496490479
+  },
+  "mamba-130m-hf__pythia-2.8b": {
+   "mutual_knn": 0.6709960699081421,
+   "cka": 0.9135679602622986
+  },
+  "mamba-130m-hf__pythia-410m": {
+   "mutual_knn": 0.67822265625,
+   "cka": 0.9182775616645813
+  },
+  "mamba-130m-hf__pythia-70m": {
+   "mutual_knn": 0.5559570789337158,
+   "cka": 0.9018160700798035
+  },
+  "mamba-130m-hf__rwkv-4-169m-pile": {
+   "mutual_knn": 0.6941406726837158,
+   "cka": 0.8464823961257935
+  },
+  "mamba-130m-hf__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.6407226324081421,
+   "cka": 0.8170038461685181
+  },
+  "mamba-130m-hf__rwkv-4-3b-pile": {
+   "mutual_knn": 0.5970703363418579,
+   "cka": 0.856382429599762
+  },
+  "mamba-130m-hf__rwkv-4-430m-pile": {
+   "mutual_knn": 0.6708984375,
+   "cka": 0.7297975420951843
+  },
+  "mamba-2.8b-hf__mamba-370m-hf": {
+   "mutual_knn": 0.672070324420929,
+   "cka": 0.9071453213691711
+  },
+  "mamba-2.8b-hf__mamba-790m-hf": {
+   "mutual_knn": 0.72021484375,
+   "cka": 0.9286757111549377
+  },
+  "mamba-2.8b-hf__pythia-1.4b": {
+   "mutual_knn": 0.6412109136581421,
+   "cka": 0.8753468990325928
+  },
+  "mamba-2.8b-hf__pythia-160m": {
+   "mutual_knn": 0.519824206829071,
+   "cka": 0.8751402497291565
+  },
+  "mamba-2.8b-hf__pythia-1b": {
+   "mutual_knn": 0.6446289420127869,
+   "cka": 0.89356529712677
+  },
+  "mamba-2.8b-hf__pythia-2.8b": {
+   "mutual_knn": 0.66552734375,
+   "cka": 0.8915621042251587
+  },
+  "mamba-2.8b-hf__pythia-410m": {
+   "mutual_knn": 0.5810546875,
+   "cka": 0.8817569017410278
+  },
+  "mamba-2.8b-hf__pythia-70m": {
+   "mutual_knn": 0.48876953125,
+   "cka": 0.85735684633255
+  },
+  "mamba-2.8b-hf__rwkv-4-169m-pile": {
+   "mutual_knn": 0.5400390625,
+   "cka": 0.8084680438041687
+  },
+  "mamba-2.8b-hf__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.6778320074081421,
+   "cka": 0.8577969074249268
+  },
+  "mamba-2.8b-hf__rwkv-4-3b-pile": {
+   "mutual_knn": 0.6810547113418579,
+   "cka": 0.8951730132102966
+  },
+  "mamba-2.8b-hf__rwkv-4-430m-pile": {
+   "mutual_knn": 0.6270507574081421,
+   "cka": 0.8475024104118347
+  },
+  "mamba-370m-hf__mamba-790m-hf": {
+   "mutual_knn": 0.7652343511581421,
+   "cka": 0.9737927913665771
+  },
+  "mamba-370m-hf__pythia-1.4b": {
+   "mutual_knn": 0.712890625,
+   "cka": 0.9017771482467651
+  },
+  "mamba-370m-hf__pythia-160m": {
+   "mutual_knn": 0.6063476800918579,
+   "cka": 0.885948657989502
+  },
+  "mamba-370m-hf__pythia-1b": {
+   "mutual_knn": 0.7048828601837158,
+   "cka": 0.9040124416351318
+  },
+  "mamba-370m-hf__pythia-2.8b": {
+   "mutual_knn": 0.7019531726837158,
+   "cka": 0.9351118803024292
+  },
+  "mamba-370m-hf__pythia-410m": {
+   "mutual_knn": 0.6693359613418579,
+   "cka": 0.9063360691070557
+  },
+  "mamba-370m-hf__pythia-70m": {
+   "mutual_knn": 0.5167969465255737,
+   "cka": 0.8803393840789795
+  },
+  "mamba-370m-hf__rwkv-4-169m-pile": {
+   "mutual_knn": 0.6629883050918579,
+   "cka": 0.8674196600914001
+  },
+  "mamba-370m-hf__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.71142578125,
+   "cka": 0.8258824348449707
+  },
+  "mamba-370m-hf__rwkv-4-3b-pile": {
+   "mutual_knn": 0.677734375,
+   "cka": 0.8680373430252075
+  },
+  "mamba-370m-hf__rwkv-4-430m-pile": {
+   "mutual_knn": 0.709667980670929,
+   "cka": 0.8425761461257935
+  },
+  "mamba-790m-hf__pythia-1.4b": {
+   "mutual_knn": 0.7052733898162842,
+   "cka": 0.9066835045814514
+  },
+  "mamba-790m-hf__pythia-160m": {
+   "mutual_knn": 0.5580078363418579,
+   "cka": 0.8829151391983032
+  },
+  "mamba-790m-hf__pythia-1b": {
+   "mutual_knn": 0.6766601800918579,
+   "cka": 0.9110167026519775
+  },
+  "mamba-790m-hf__pythia-2.8b": {
+   "mutual_knn": 0.7139648199081421,
+   "cka": 0.9148957133293152
+  },
+  "mamba-790m-hf__pythia-410m": {
+   "mutual_knn": 0.64111328125,
+   "cka": 0.9063341021537781
+  },
+  "mamba-790m-hf__pythia-70m": {
+   "mutual_knn": 0.4991210997104645,
+   "cka": 0.8748218417167664
+  },
+  "mamba-790m-hf__rwkv-4-169m-pile": {
+   "mutual_knn": 0.5971680283546448,
+   "cka": 0.8747633695602417
+  },
+  "mamba-790m-hf__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.70751953125,
+   "cka": 0.9031503796577454
+  },
+  "mamba-790m-hf__rwkv-4-3b-pile": {
+   "mutual_knn": 0.682421863079071,
+   "cka": 0.907864511013031
+  },
+  "mamba-790m-hf__rwkv-4-430m-pile": {
+   "mutual_knn": 0.667675793170929,
+   "cka": 0.9102799296379089
+  },
+  "pythia-1.4b__pythia-160m": {
+   "mutual_knn": 0.7099609375,
+   "cka": 0.9567968845367432
+  },
+  "pythia-1.4b__pythia-1b": {
+   "mutual_knn": 0.830078125,
+   "cka": 0.9848583936691284
+  },
+  "pythia-1.4b__pythia-2.8b": {
+   "mutual_knn": 0.8277343511581421,
+   "cka": 0.9855425953865051
+  },
+  "pythia-1.4b__pythia-410m": {
+   "mutual_knn": 0.7694336175918579,
+   "cka": 0.9647658467292786
+  },
+  "pythia-1.4b__pythia-70m": {
+   "mutual_knn": 0.65771484375,
+   "cka": 0.9347038865089417
+  },
+  "pythia-1.4b__rwkv-4-169m-pile": {
+   "mutual_knn": 0.647656261920929,
+   "cka": 0.8340761065483093
+  },
+  "pythia-1.4b__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.7147461175918579,
+   "cka": 0.8687495589256287
+  },
+  "pythia-1.4b__rwkv-4-3b-pile": {
+   "mutual_knn": 0.6910156607627869,
+   "cka": 0.8876862525939941
+  },
+  "pythia-1.4b__rwkv-4-430m-pile": {
+   "mutual_knn": 0.69287109375,
+   "cka": 0.8612164855003357
+  },
+  "pythia-160m__pythia-1b": {
+   "mutual_knn": 0.6819336414337158,
+   "cka": 0.9469510912895203
+  },
+  "pythia-160m__pythia-2.8b": {
+   "mutual_knn": 0.7083008289337158,
+   "cka": 0.9631895422935486
+  },
+  "pythia-160m__pythia-410m": {
+   "mutual_knn": 0.716503918170929,
+   "cka": 0.9715068340301514
+  },
+  "pythia-160m__pythia-70m": {
+   "mutual_knn": 0.7088867425918579,
+   "cka": 0.9696725010871887
+  },
+  "pythia-160m__rwkv-4-169m-pile": {
+   "mutual_knn": 0.6732422113418579,
+   "cka": 0.8288288712501526
+  },
+  "pythia-160m__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.59130859375,
+   "cka": 0.7667112350463867
+  },
+  "pythia-160m__rwkv-4-3b-pile": {
+   "mutual_knn": 0.561328113079071,
+   "cka": 0.8093419075012207
+  },
+  "pythia-160m__rwkv-4-430m-pile": {
+   "mutual_knn": 0.6297851800918579,
+   "cka": 0.7010048627853394
+  },
+  "pythia-1b__pythia-2.8b": {
+   "mutual_knn": 0.8010742664337158,
+   "cka": 0.9811453223228455
+  },
+  "pythia-1b__pythia-410m": {
+   "mutual_knn": 0.78076171875,
+   "cka": 0.9702392220497131
+  },
+  "pythia-1b__pythia-70m": {
+   "mutual_knn": 0.63623046875,
+   "cka": 0.9207603335380554
+  },
+  "pythia-1b__rwkv-4-169m-pile": {
+   "mutual_knn": 0.6658203601837158,
+   "cka": 0.8407987952232361
+  },
+  "pythia-1b__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.7306641340255737,
+   "cka": 0.8614023923873901
+  },
+  "pythia-1b__rwkv-4-3b-pile": {
+   "mutual_knn": 0.6920897960662842,
+   "cka": 0.8801235556602478
+  },
+  "pythia-1b__rwkv-4-430m-pile": {
+   "mutual_knn": 0.7330077886581421,
+   "cka": 0.8237298727035522
+  },
+  "pythia-2.8b__pythia-410m": {
+   "mutual_knn": 0.744921863079071,
+   "cka": 0.974018931388855
+  },
+  "pythia-2.8b__pythia-70m": {
+   "mutual_knn": 0.6592773199081421,
+   "cka": 0.9442253708839417
+  },
+  "pythia-2.8b__rwkv-4-169m-pile": {
+   "mutual_knn": 0.6340820789337158,
+   "cka": 0.8276678919792175
+  },
+  "pythia-2.8b__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.72216796875,
+   "cka": 0.8613409399986267
+  },
+  "pythia-2.8b__rwkv-4-3b-pile": {
+   "mutual_knn": 0.711621105670929,
+   "cka": 0.8922562599182129
+  },
+  "pythia-2.8b__rwkv-4-430m-pile": {
+   "mutual_knn": 0.6800781488418579,
+   "cka": 0.8454592823982239
+  },
+  "pythia-410m__pythia-70m": {
+   "mutual_knn": 0.67822265625,
+   "cka": 0.9563174247741699
+  },
+  "pythia-410m__rwkv-4-169m-pile": {
+   "mutual_knn": 0.672167956829071,
+   "cka": 0.846589207649231
+  },
+  "pythia-410m__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.654003918170929,
+   "cka": 0.8054640889167786
+  },
+  "pythia-410m__rwkv-4-3b-pile": {
+   "mutual_knn": 0.623339831829071,
+   "cka": 0.8161624670028687
+  },
+  "pythia-410m__rwkv-4-430m-pile": {
+   "mutual_knn": 0.69287109375,
+   "cka": 0.7930129170417786
+  },
+  "pythia-70m__rwkv-4-169m-pile": {
+   "mutual_knn": 0.61083984375,
+   "cka": 0.825648844242096
+  },
+  "pythia-70m__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.55029296875,
+   "cka": 0.7025814652442932
+  },
+  "pythia-70m__rwkv-4-3b-pile": {
+   "mutual_knn": 0.5350586175918579,
+   "cka": 0.7721076607704163
+  },
+  "pythia-70m__rwkv-4-430m-pile": {
+   "mutual_knn": 0.5838866829872131,
+   "cka": 0.6558234095573425
+  },
+  "rwkv-4-169m-pile__rwkv-4-1b5-pile": {
+   "mutual_knn": 0.6623046398162842,
+   "cka": 0.9270360469818115
+  },
+  "rwkv-4-169m-pile__rwkv-4-3b-pile": {
+   "mutual_knn": 0.633007824420929,
+   "cka": 0.9163954257965088
+  },
+  "rwkv-4-169m-pile__rwkv-4-430m-pile": {
+   "mutual_knn": 0.7177734375,
+   "cka": 0.967367947101593
+  },
+  "rwkv-4-1b5-pile__rwkv-4-3b-pile": {
+   "mutual_knn": 0.7756836414337158,
+   "cka": 0.9864775538444519
+  },
+  "rwkv-4-1b5-pile__rwkv-4-430m-pile": {
+   "mutual_knn": 0.73486328125,
+   "cka": 0.9726551175117493
+  },
+  "rwkv-4-3b-pile__rwkv-4-430m-pile": {
+   "mutual_knn": 0.6878906488418579,
+   "cka": 0.9518650770187378
+  }
+ }
+}
