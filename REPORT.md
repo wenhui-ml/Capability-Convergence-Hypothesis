@@ -1,9 +1,8 @@
 # CCH Experiments — Report
 
-Status: **COMPLETE** (all pipeline runs finished 2026-07-10, `logs/MASTER_DONE`;
-analysis and verdicts below written 2026-07-10).
-Follow-up phase (amendment 7): **COMPLETE** 2026-07-10 19:05, 44 jobs, 0 failures
-(`logs/FOLLOWUP_DONE`) — see [Follow-up phase results](#follow-up-phase-amendment-7--results).
+Status: **COMPLETE** (all pipeline runs and the analysis/verdicts below finished
+2026-07-10).
+Follow-up phase (amendment 7): **COMPLETE** — see [Follow-up phase results](#follow-up-phase-amendment-7--results).
 Note: `summary_expC.json` and `figs/expC_bifurcation.*` now include the amendment-7a
 seeds (c_dp4 general: 8 seeds), under which C-iii fails the frozen ≥2/3 criterion;
 the 3-seed primary verdict is preserved in the table below.
@@ -116,7 +115,7 @@ bits/scalar**. Error is exact-retrieval error at the answer position.
 | B-vii | Wall bites on effective, not nominal, entropy | **PARTIAL** | c=16: 50%-crossing at N≈27.4 vs effective-entropy prediction 24.9 (nominal predicts 12.4) ✓. c=4: crossing at N≈11.5 ≈ nominal 12.4, not the effective 16.6 ✗. Also the block design admits a retrieval-free shortcut for N ≤ c (only one distinct value present), which contaminates the small-N region — see anomaly (3) below. Exact analytic H per condition was never emitted by the pipeline (deviation) |
 | B-viii | Local-window hybrid NOT rescued | **SUPPORTED** | state m=64 + window-32 layer: err 0.995 at N=128 (and ≥ 0.91 at *all* N — it never learns retrieval at all, like the far-trained SWA; a stronger failure than the predicted floor-tracking) |
 
-Convergence-failure seeds vs capacity effects (per handoff instruction):
+Convergence-failure seeds vs capacity effects:
 - **m=64: 3 of 6 seeds never learned even N=2** (err 0.867 high-κ s2; 0.979,
   0.780 low-κ s0,s2). The B-i/B-ii/B-iii m=64 means above include these seeds
   (no post-hoc exclusion, per reporting commitment 1); numbers excluding them
@@ -137,9 +136,8 @@ Anomalies (Exp B):
    state vs hybrid), but "full attention (upper-bound reference)" language must
    not survive into the paper.
 2. `plot_b.py` had an f-string syntax error that killed the pipeline's plotting
-   step (visible at the end of `logs/master.log`) — this is why
-   `summary_expB.json`/`expB_floor.pdf` were missing. Fixed and regenerated;
-   no training job was missing.
+   step — this is why `summary_expB.json`/`expB_floor.pdf` were missing. Fixed
+   and regenerated; no training job was missing.
 3. **vb16 hybrid found a degenerate shortcut**: with value blocks c=16, error is
    0.000 for N ≤ 16 (only one distinct value in the stream — copying "the"
    value suffices) then jumps to ≈ 1 − 1/(N/16) (0.484 / 0.742 / 0.868 at
@@ -180,7 +178,7 @@ Excluding/including them does not change the verdict.
 
 ## Follow-up phase (amendment 7) — results
 
-All four extensions ran 2026-07-10 on GPUs 0–3 (44 jobs, 0 failures). Analysis
+All four extensions ran 2026-07-10. Analysis
 code: `analyze_followup.py` → `results/followup_summary.json`. Frozen first-phase
 files are untouched; follow-up outputs live in `results/expC/` (new seeds),
 `results/expB/followup/`, `results/expA/followup/`, `results/expD/d_comm_v2.json`.
@@ -335,11 +333,6 @@ ratio). Per-prediction status should be read from the sections above, not the co
   nondeterministic 20k/100k mixing in `plot_c.py`'s loader (produced a wrong
   FAILED verdict for C-iii in the first `summary_expC.json`). Both fixed
   2026-07-10; figures and summaries regenerated from unchanged raw JSONs.
-- First launch used 6 GPUs; per user request everything moved to ONE GPU (cuda:7)
-  with ≤5 concurrent jobs (~15–30 GB, <15% of the card's memory).
-- Two waves of jobs were SIGKILLed by an external process on this shared server
-  (not OOM; timing coincided with system-level cleanup of other users' GPU procs).
-  Affected jobs are re-queued automatically; no partial results are used.
 - mamba-ssm + causal-conv1d CUDA kernels compiled from source (torch 2.11/cu130,
   sm_103), so Mamba evals use the fast path; RWKV uses the HF JIT CUDA kernel.
 - Chunked WY delta scan: 29× speedup over the sequential reference; exactness
